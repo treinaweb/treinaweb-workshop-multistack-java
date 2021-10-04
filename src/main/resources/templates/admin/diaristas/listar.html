@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html th:replace="~{base :: template (~{::main})}">
+<body>
+  <main>
+    <h1>Lista de Diaristas</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Estado</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="diarista : ${diaristas}">
+          <td th:text="${diarista.id}"></td>
+          <td th:text="${diarista.nomeCompleto}"></td>
+          <td th:text="${diarista.email}"></td>
+          <td th:text="${diarista.estado}"></td>
+          <td>
+            <a
+              class="btn btn-sm btn-warning"
+              th:href="@{/admin/diaristas/{id}/editar (id=${diarista.id})}"
+            >
+              Editar
+            </a>
+            <a
+              class="btn btn-sm btn-danger"
+              th:href="@{/admin/diaristas/{id}/excluir (id=${diarista.id})}"
+              onclick="return confirm('Tem certeza que deseja excluir esse registro?')"
+            >
+              Excluir
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a class="btn btn-primary" th:href="@{/admin/diaristas/cadastrar}">Cadastrar Diarista</a>
+  </main>
+</body>
+</html>
